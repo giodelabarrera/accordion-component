@@ -1,0 +1,39 @@
+
+$Accordion-item-title-backgroundColor: #f7f7f7
+$Accordion-item-title-borderColor: #d8d8d8
+$Accordion-item-title-color: #646464
+$Accordion-item-body-backgroundColor: #ffffff
+$Accordion-item-body-borderColor: #d8d8d8
+$Accordion-item-body-color: #495057
+
+.Accordion
+
+  &-item-title
+    background-color: $Accordion-item-title-backgroundColor
+    border-width: 1px
+    border-color: $Accordion-item-title-borderColor
+    border-style: solid
+    color: $Accordion-item-title-color
+    cursor: pointer
+    padding: 15px
+    font-weight: bold
+
+  &-item-body
+    background-color: $Accordion-item-body-backgroundColor
+    border-width: 1px
+    border-color: $Accordion-item-body-borderColor
+    border-style: solid
+    color: $Accordion-item-body-color
+    transition-property: height, padding
+    transition-duration: .35s
+    transition-timing-function: ease
+    height: 0
+    overflow: hidden
+    position: relative
+
+    & :last-child
+      margin-bottom: 0
+
+    &.is-expanded
+      height: auto
+      padding: 15px
