@@ -1,9 +1,13 @@
-const path = require('path')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+'use_strict';
+
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const GenerateJsonPlugin = require('generate-json-webpack-plugin');
+const sectionData = require('./data/section.json')
 
 module.exports = {
   context: path.resolve(__dirname, 'src'),
-  entry: path.resolve(__dirname, 'src/index.js'),
+  entry: ['babel-polyfill', path.resolve(__dirname, 'src/index.js')],
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: "bundle.js",
@@ -35,6 +39,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'public/index.html')
-    })
+    }),
+    new GenerateJsonPlugin('section.json', sectionData)
   ]
 }

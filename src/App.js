@@ -1,6 +1,6 @@
 import Component from "./components/Component";
 import Accordion from "./components/Accordion";
-import './App.sass'
+import Client from "./services/http/client";
 
 class App extends Component {
 
@@ -29,11 +29,16 @@ class App extends Component {
 
   init() {
     this.element.innerHTML = this.render()
-    
+
     const accordion = new Accordion(this.element.querySelector('dl'))
+    
     accordion.init()
 
-    // TODO AJAX
+    const client = new Client({ baseUri: 'http://localhost:8080/' })
+
+    client.get('section.json').then(({ title, body }) => {
+      accordion.addItem(title, `<p>${body}</p>`)
+    })
   }
 }
 

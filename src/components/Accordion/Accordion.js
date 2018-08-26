@@ -10,10 +10,10 @@ class Accordion extends Component {
     this._itemBodies = Array.from(this.element.querySelectorAll('dd'))
   }
 
-  _addClasses() {
+  _addClassNames() {
     this.element.classList.add('Accordion')
-    this._itemTitles.forEach(itemTitle => itemTitle.classList.add('Accordion-item-title'))
-    this._itemBodies.forEach(itemBody => itemBody.classList.add('Accordion-item-body'))
+    this._itemTitles.forEach(itemTitle => itemTitle.classList.add('Accordion-itemTitle'))
+    this._itemBodies.forEach(itemBody => itemBody.classList.add('Accordion-itemBody'))
   }
 
   _expand(itemBody) {
@@ -37,13 +37,41 @@ class Accordion extends Component {
     this._collapseSiblings(itemBody)
 
     this._expand(itemBody)
+  }
 
-    // const expandEvent = new CustomEvent('expand')
-    // if (this._isExpanded(itemBody)) itemBody.dispatchEvent(expandEvent)
+  _createItemTitle(content) {
+    const itemTitle = document.createElement('dt')
+    
+    itemTitle.classList.add('Accordion-itemTitle')
+    itemTitle.innerHTML = content
+    itemTitle.addEventListener('click', this._handleItemTitleClick)
+
+    return itemTitle
+  }
+
+  _createItemBody(content) {
+    const itemBody = document.createElement('dd')
+
+    itemBody.classList.add('Accordion-itemBody')
+    itemBody.innerHTML = content
+
+    return itemBody
+  }
+
+  addItem(titleContent, bodyContent) {
+
+    const itemTitle = this._createItemTitle(titleContent)
+    this._itemTitles.push(itemTitle)
+
+    const itemBody = this._createItemBody(bodyContent)
+    this._itemBodies.push(itemBody)
+
+    this.element.appendChild(itemTitle)
+    this.element.appendChild(itemBody)
   }
 
   init() {
-    this._addClasses()
+    this._addClassNames()
 
     this._itemTitles.forEach(itemTitle => itemTitle.addEventListener('click', this._handleItemTitleClick))
   }
