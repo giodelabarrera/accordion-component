@@ -13,31 +13,19 @@ class Client {
 
     const url = this.config.baseUri ? this.config.baseUri + uri : uri
 
-    const response = await fetch(url, init)
+    try {
+      let response = await fetch(url, init)
+      let jsonResponse = await response.json()
 
-    const jsonResponse = await response.json()
-
-    return jsonResponse
+      return jsonResponse
+    }
+    catch (err) {
+      throw new Error(err.message)
+    }
   }
 
   get(url, options = {}) {
     return this.request('GET', url, options)
-  }
-
-  delete(url, options = {}) {
-    return this.request('DELETE', url, options)
-  }
-
-  patch(url, options = {}) {
-    return this.request('PATCH', url, options)
-  }
-
-  post(url, options = {}) {
-    return this.request('POST', url, options)
-  }
-
-  put(url, options = {}) {
-    return this.request('PUT', url, options)
   }
 }
 

@@ -31,14 +31,12 @@ class App extends Component {
     this.element.innerHTML = this.render()
 
     const accordion = new Accordion(this.element.querySelector('dl'))
-    
+
     accordion.init()
 
     const client = new Client({ baseUri: 'http://localhost:8080/' })
 
-    client.get('section.json').then(({ title, body }) => {
-      accordion.addItem(title, `<p>${body}</p>`)
-    })
+    client.get('section.json').then(({ title, body }) => accordion.addItem(title, `<p>${body}</p>`))
   }
 }
 
