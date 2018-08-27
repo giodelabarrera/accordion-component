@@ -6,9 +6,8 @@
 /coverage
 
 # production
-# commented for github pages
-#/build
-#/dist
+/build
+/dist
 
 # misc
 .DS_Store
