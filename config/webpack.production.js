@@ -30,8 +30,8 @@ module.exports = {
     new CleanWebpackPlugin([commonPaths.build], { root: commonPaths.root }),
     new MiniCssExtractPlugin({ filename: 'styles.[chunkhash].css' }),
     new DefinePlugin({
-      SCHEME: JSON.stringify('http'),
-      HOST: JSON.stringify('localhost:3000'),
+      SCHEME: JSON.stringify('https'),
+      HOST: JSON.stringify('giodelabarrera.github.io/accordion-component'),
     })
   ]
 };
