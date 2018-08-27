@@ -1,8 +1,12 @@
 
 class Component {
 
-  constructor(tagName = '') {
-    this._element = (tagName) ? document.createElement(tagName) : null
+  constructor(tagNameOrElement) {
+    if (tagNameOrElement instanceof String) {
+      this._element = document.createElement(tagNameOrElement)
+    } else if (tagNameOrElement instanceof HTMLElement) {
+      this._element = tagNameOrElement
+    }
   }
 
   get element() {
