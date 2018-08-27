@@ -26,6 +26,7 @@
     "css-loader": "^1.0.0",
     "generate-json-webpack-plugin": "^0.3.1",
     "html-webpack-plugin": "^3.2.0",
+    "identity-obj-proxy": "^3.0.0",
     "jest": "^23.5.0",
     "node-sass": "^4.9.3",
     "sass-loader": "^7.1.0",
@@ -34,5 +35,10 @@
     "webpack-cli": "^3.1.0",
     "webpack-dev-server": "^3.1.5"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(sass|css|less)$": "identity-obj-proxy"
+    }
+  }
 }

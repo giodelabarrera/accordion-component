@@ -13,7 +13,7 @@ class App extends Component {
 
     const client = new HttpClient({ baseUri: 'http://localhost:8080/' })
 
-    client.get('section.json').then(({ title, body }) => accordion.addItem(title, `<p>${body}</p>`))
+    client.get('section.json').then(({ title, description }) => accordion.addItem(title, `<p>${description}</p>`))
   }
 
   render() {

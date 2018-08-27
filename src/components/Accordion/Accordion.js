@@ -1,4 +1,5 @@
 import Component from "../Component";
+import './Accordion.sass'
 
 class Accordion extends Component {
 
@@ -18,6 +19,14 @@ class Accordion extends Component {
     })
     
     this._descriptions.forEach(description => this._addDescriptionClass(description))
+  }
+
+  get terms() {
+    return this._terms
+  }
+  
+  get descriptions() {
+    return this._descriptions
   }
 
   _addTermClass(term) {
@@ -74,6 +83,7 @@ class Accordion extends Component {
   }
 
   addItem(termContent, descContent) {
+    debugger
     const term = this._createTerm(termContent)
     this._addTermClass(term)
     this._terms.push(term)

@@ -35,7 +35,7 @@ module.exports = {
     compress: true,
     port: 8080
   },
-  // devtool: 'source-map',
+  devtool: 'source-map',
   plugins: [
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'public/index.html')
