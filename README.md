@@ -3,6 +3,8 @@
 
 Accordion built with vanilla js, es6, sass, webpack
 
+Check demo [https://giodelabarrera.github.io/accordion-component](https://giodelabarrera.github.io/accordion-component).
+
 ## Instalation
 
 Install the dependencies
