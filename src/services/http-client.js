@@ -1,5 +1,5 @@
 
-class Client {
+class HttpClient {
 
   constructor(config = {}) {
     this.config = config
@@ -29,4 +29,4 @@ class Client {
   }
 }
 
-export default Client
+export default HttpClient

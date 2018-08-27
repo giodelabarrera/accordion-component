@@ -1,11 +1,19 @@
 import Component from "./components/Component";
 import Accordion from "./components/Accordion";
-import Client from "./services/http/client";
+import HttpClient from "./services/http-client";
 
 class App extends Component {
 
-  constructor() {
-    super('div')
+  constructor(element) {
+    super(element)
+
+    this.element.innerHTML = this.render()
+
+    const accordion = new Accordion(this.element.querySelector('dl'))
+
+    const client = new HttpClient({ baseUri: 'http://localhost:8080/' })
+
+    client.get('section.json').then(({ title, body }) => accordion.addItem(title, `<p>${body}</p>`))
   }
 
   render() {
@@ -25,18 +33,6 @@ class App extends Component {
         </dd>
       </dl>
     `
-  }
-
-  init() {
-    this.element.innerHTML = this.render()
-
-    const accordion = new Accordion(this.element.querySelector('dl'))
-
-    accordion.init()
-
-    const client = new Client({ baseUri: 'http://localhost:8080/' })
-
-    client.get('section.json').then(({ title, body }) => accordion.addItem(title, `<p>${body}</p>`))
   }
 }
 

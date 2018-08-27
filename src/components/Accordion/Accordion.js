@@ -3,77 +3,87 @@ import Component from "../Component";
 class Accordion extends Component {
 
   constructor(element) {
-    super()
+    super(element)
 
-    this.element = element
-    this._itemTitles = Array.from(this.element.querySelectorAll('dt'))
-    this._itemBodies = Array.from(this.element.querySelectorAll('dd'))
-  }
+    if (!(element instanceof HTMLDListElement)) throw new Error('element must be of type HTMLDListElement')
 
-  _addClassNames() {
     this.element.classList.add('Accordion')
-    this._itemTitles.forEach(itemTitle => itemTitle.classList.add('Accordion-itemTitle'))
-    this._itemBodies.forEach(itemBody => itemBody.classList.add('Accordion-itemBody'))
+
+    this._terms = Array.from(this.element.querySelectorAll('dt'))
+    this._descriptions = Array.from(this.element.querySelectorAll('dd'))
+
+    this._terms.forEach(term => {
+      this._addTermClass(term)
+      this._addTermClickListener(term)
+    })
+    
+    this._descriptions.forEach(description => this._addDescriptionClass(description))
   }
 
-  _expand(itemBody) {
-    itemBody.classList.toggle('is-expanded')
+  _addTermClass(term) {
+    term.classList.add('Accordion-itemTerm')
   }
 
-  _isExpanded(itemBody) {
-    return itemBody.classList.contains('is-expanded')
+  _addDescriptionClass(description) {
+    description.classList.add('Accordion-itemDescription')
   }
 
-  _collapseSiblings(itemBody) {
-    this._itemBodies.forEach(_itemBody => {
-      if (!_itemBody.isSameNode(itemBody)) _itemBody.classList.remove('is-expanded')
+  _addTermClickListener(term) {
+    term.addEventListener('click', this._handleTermClick)
+  }
+
+  _expand(description) {
+    description.classList.toggle('is-expanded')
+  }
+
+  _isExpanded(description) {
+    return description.classList.contains('is-expanded')
+  }
+
+  _collapseSiblings(description) {
+    this._descriptions.forEach(_description => {
+      if (!_description.isSameNode(description)) _description.classList.remove('is-expanded')
     })
   }
 
-  _handleItemTitleClick = e => {
+  _handleTermClick = e => {
+    const description = e.target.nextElementSibling
 
-    const itemBody = e.target.nextElementSibling
+    this._collapseSiblings(description)
 
-    this._collapseSiblings(itemBody)
-
-    this._expand(itemBody)
+    this._expand(description)
   }
 
-  _createItemTitle(content) {
-    const itemTitle = document.createElement('dt')
+  _createTerm(content) {
+    const term = document.createElement('dt')
     
-    itemTitle.classList.add('Accordion-itemTitle')
-    itemTitle.innerHTML = content
-    itemTitle.addEventListener('click', this._handleItemTitleClick)
+    this._addTermClass(term)
+    term.innerHTML = content
+    this._addTermClickListener(term)
 
-    return itemTitle
+    return term
   }
 
-  _createItemBody(content) {
-    const itemBody = document.createElement('dd')
+  _createDescription(content) {
+    const description = document.createElement('dd')
 
-    itemBody.classList.add('Accordion-itemBody')
-    itemBody.innerHTML = content
+    this._addDescriptionClass(description)
+    description.innerHTML = content
 
-    return itemBody
+    return description
   }
 
-  addItem(titleContent, bodyContent) {
+  addItem(termContent, descContent) {
+    const term = this._createTerm(termContent)
+    this._addTermClass(term)
+    this._terms.push(term)
 
-    const itemTitle = this._createItemTitle(titleContent)
-    this._itemTitles.push(itemTitle)
+    const description = this._createDescription(descContent)
+    this._addDescriptionClass(description)
+    this._descriptions.push(description)
 
-    const itemBody = this._createItemBody(bodyContent)
-    this._itemBodies.push(itemBody)
-
-    this.element.appendChild(itemTitle)
-    this.element.appendChild(itemBody)
-  }
-
-  init() {
-    this._addClassNames()
-
-    this._itemTitles.forEach(itemTitle => itemTitle.addEventListener('click', this._handleItemTitleClick))
+    this.element.appendChild(term)
+    this.element.appendChild(description)
   }
 }
 
