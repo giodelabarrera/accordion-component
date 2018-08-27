@@ -1,7 +1,32 @@
 
 # Accordion Component
 
-Accordion built with vanilla js, es6, sass, webpack, node
+Accordion built with vanilla js, es6, sass, webpack
+
+## Instalation
+
+Install the dependencies
+
+```sh
+npm i
+```
+
+Run the application in development environment
+
+```sh
+npm run watch
+```
+
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+
+## Test
+
+Launches the test runner.
+
+```sh
+npm test
+```
 
 ## Frontend Exercise
 

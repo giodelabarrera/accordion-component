@@ -1,5 +1,4 @@
-
-import Accordion from '../src/components/Accordion';
+import Accordion from '../src/components/Accordion'
 
 describe('accordion', () => {
 

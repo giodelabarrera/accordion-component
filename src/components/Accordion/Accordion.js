@@ -83,7 +83,6 @@ class Accordion extends Component {
   }
 
   addItem(termContent, descContent) {
-    debugger
     const term = this._createTerm(termContent)
     this._addTermClass(term)
     this._terms.push(term)

@@ -11,7 +11,7 @@ class App extends Component {
 
     const accordion = new Accordion(this.element.querySelector('dl'))
 
-    const client = new HttpClient({ baseUri: 'http://localhost:8080/' })
+    const client = new HttpClient({ baseUri: `${SCHEME}://${HOST}/` })
 
     client.get('section.json').then(({ title, description }) => accordion.addItem(title, `<p>${description}</p>`))
   }
